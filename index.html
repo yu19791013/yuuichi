@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,7 +21,7 @@
     </div>
 
     <!-- ① 作業報告書 -->
-   <div class="page" id="report" style="display:none">
+    <div class="page" id="report" style="display:none">
         <h2>① 作業報告書作成</h2>
 
         <label>日付：</label>
@@ -35,23 +36,20 @@
         <label>写真：</label>
         <input type="file" id="photoInput" multiple accept="image/*"><br>
 
-     <div class="page" id="faq" style="display:none">
-
         <button onclick="backMenu()">戻る</button>
     </div>
 
     <!-- ② 社内FAQ -->
-    <div class="page" id="faq">
+    <div class="page" id="faq" style="display:none">
         <h2>② 社内FAQ（AI）</h2>
         <textarea id="faqInput" placeholder="質問を入力"></textarea>
-       <button onclick="askAI()">回答する</button>
-
+        <button onclick="askAI()">回答する</button>
         <pre id="faqOutput"></pre>
         <button onclick="backMenu()">戻る</button>
     </div>
 
     <!-- ③ 顧客メール自動返信 -->
-   <div class="page" id="mail" style="display:none">
+    <div class="page" id="mail" style="display:none">
         <h2>③ 顧客メール自動返信テンプレ</h2>
         <textarea id="mailInput" placeholder="状況を入力"></textarea>
         <button onclick="generateMail()">テンプレ生成</button>
@@ -60,7 +58,7 @@
     </div>
 
     <!-- ④ Excelデータ整理 -->
-   <div class="page" id="excel" style="display:none">
+    <div class="page" id="excel" style="display:none">
         <h2>④ Excelデータ整理（CSV → 整形）</h2>
         <input type="file" id="csvInput" accept=".csv">
         <button onclick="processCSV()">整形する</button>
@@ -69,7 +67,7 @@
     </div>
 
     <!-- ⑤ 議事録要約 -->
-   <div class="page" id="summary" style="display:none">
+    <div class="page" id="summary" style="display:none">
         <h2>⑤ 議事録 → 要点抽出（AI）</h2>
         <textarea id="summaryInput" placeholder="議事録を貼り付け"></textarea>
         <button onclick="summarize()">要点抽出</button>
