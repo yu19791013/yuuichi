@@ -26,15 +26,35 @@ function generatePDF() {
     a.download = "作業報告書.txt";
     a.click();
 }
-
-// ② 社内FAQ（AI回答）
+// ② 社内FAQ（AI回答：OpenAI 接続版）
 async function askAI() {
     const q = document.getElementById("faqInput").value;
     document.getElementById("faqOutput").textContent = "回答生成中…";
 
-    const answer = `【AI回答】\n質問：${q}\n\n→ この質問に対する一般的な回答例を表示します。\n（※API接続前のテスト動作）`;
+    const apiKey = "ここにあなたのAPIキーを入れる";
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [
+                { role: "system", content: "あなたは社内FAQに答えるアシスタントです。" },
+                { role: "user", content: q }
+            ]
+        })
+    });
+
+    const data = await response.json();
+    const answer = data.choices?.[0]?.message?.content || "回答を取得できませんでした。";
 
     document.getElementById("faqOutput").textContent = answer;
+}
+
+
 }
 
 // ③ 顧客メール自動返信
