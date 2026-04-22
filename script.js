@@ -26,6 +26,7 @@ function generatePDF() {
     a.download = "作業報告書.txt";
     a.click();
 }
+
 // ② 社内FAQ（AI回答：OpenAI 接続版）
 async function askAI() {
     const q = document.getElementById("faqInput").value;
@@ -52,9 +53,6 @@ async function askAI() {
     const answer = data.choices?.[0]?.message?.content || "回答を取得できませんでした。";
 
     document.getElementById("faqOutput").textContent = answer;
-}
-
-
 }
 
 // ③ 顧客メール自動返信
@@ -103,27 +101,4 @@ function summarize() {
 
     document.getElementById("summaryOutput").textContent = summary;
 }
-// ページ切り替え
-function showPage(pageId) {
-    // すべてのページを非表示
-    document.querySelectorAll('.page').forEach(page => {
-        page.style.display = 'none';
-    });
 
-    // メニューを非表示
-    document.getElementById('menu').style.display = 'none';
-
-    // 指定ページを表示
-    document.getElementById(pageId).style.display = 'block';
-}
-
-// メニューに戻る
-function backMenu() {
-    // すべてのページを非表示
-    document.querySelectorAll('.page').forEach(page => {
-        page.style.display = 'none';
-    });
-
-    // メニューを表示
-    document.getElementById('menu').style.display = 'block';
-}
