@@ -2,33 +2,79 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>作業報告書テスト版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業務サポート5機能アプリ</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
-<h1>作業報告書（テスト版）</h1>
+    <h1>業務サポート5機能アプリ</h1>
 
-<div class="form-block">
-    <label>作業日</label>
-    <input type="date" id="workDate">
+    <!-- トップメニュー -->
+    <div id="menu">
+        <button onclick="showPage('report')">① 作業報告書作成</button>
+        <button onclick="showPage('faq')">② 社内FAQ（AI）</button>
+        <button onclick="showPage('mail')">③ 顧客メール自動返信</button>
+        <button onclick="showPage('excel')">④ Excelデータ整理</button>
+        <button onclick="showPage('summary')">⑤ 議事録→要点抽出</button>
+    </div>
 
-    <label>現場名</label>
-    <input type="text" id="siteName">
+    <!-- ① 作業報告書 -->
+    <div class="page" id="report">
+        <h2>① 作業報告書作成</h2>
 
-    <label>担当者</label>
-    <input type="text" id="person">
+        <label>日付：</label>
+        <input type="date" id="workDate"><br>
 
-    <label>作業区分</label>
-    <input type="text" id="type">
+        <label>現場名：</label>
+        <input type="text" id="siteName"><br>
 
-    <label>作業内容</label>
-    <textarea id="content" rows="6"></textarea>
+        <label>作業内容：</label>
+        <textarea id="workDetail"></textarea><br>
 
-    <button onclick="generatePDF()">PDF出力</button>
-</div>
+        <label>写真：</label>
+        <input type="file" id="photoInput" multiple accept="image/*"><br>
 
-<script src="script.js"></script>
+        <button onclick="generatePDF()">PDFを作成</button>
+        <button onclick="backMenu()">戻る</button>
+    </div>
+
+    <!-- ② 社内FAQ -->
+    <div class="page" id="faq">
+        <h2>② 社内FAQ（AI）</h2>
+        <textarea id="faqInput" placeholder="質問を入力"></textarea>
+        <button onclick="askAI()">回答する</button>
+        <pre id="faqOutput"></pre>
+        <button onclick="backMenu()">戻る</button>
+    </div>
+
+    <!-- ③ 顧客メール自動返信 -->
+    <div class="page" id="mail">
+        <h2>③ 顧客メール自動返信テンプレ</h2>
+        <textarea id="mailInput" placeholder="状況を入力"></textarea>
+        <button onclick="generateMail()">テンプレ生成</button>
+        <pre id="mailOutput"></pre>
+        <button onclick="backMenu()">戻る</button>
+    </div>
+
+    <!-- ④ Excelデータ整理 -->
+    <div class="page" id="excel">
+        <h2>④ Excelデータ整理（CSV → 整形）</h2>
+        <input type="file" id="csvInput" accept=".csv">
+        <button onclick="processCSV()">整形する</button>
+        <pre id="csvOutput"></pre>
+        <button onclick="backMenu()">戻る</button>
+    </div>
+
+    <!-- ⑤ 議事録要約 -->
+    <div class="page" id="summary">
+        <h2>⑤ 議事録 → 要点抽出（AI）</h2>
+        <textarea id="summaryInput" placeholder="議事録を貼り付け"></textarea>
+        <button onclick="summarize()">要点抽出</button>
+        <pre id="summaryOutput"></pre>
+        <button onclick="backMenu()">戻る</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

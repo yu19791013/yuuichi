@@ -1,29 +1,85 @@
-async function generatePDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+// 画面切り替え
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    document.getElementById("menu").style.display = "none";
+}
 
-    doc.setFont("Helvetica", "normal");
+function backMenu() {
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById("menu").style.display = "block";
+}
 
-    // タイトル
-    doc.setFontSize(18);
-    doc.text("作業報告書", 20, 20);
+// ① 作業報告書 PDF生成
+function generatePDF() {
+    const date = document.getElementById("workDate").value;
+    const site = document.getElementById("siteName").value;
+    const detail = document.getElementById("workDetail").value;
 
-    doc.setFontSize(12);
+    let text = `【作業報告書】\n\n日付：${date}\n現場名：${site}\n\n【作業内容】\n${detail}\n`;
 
-    // 基本情報
-    doc.text(`作業日: ${document.getElementById("workDate").value}`, 20, 40);
-    doc.text(`現場名: ${document.getElementById("siteName").value}`, 20, 50);
-    doc.text(`担当者: ${document.getElementById("person").value}`, 20, 60);
-    doc.text(`作業区分: ${document.getElementById("type").value}`, 20, 70);
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
 
-    // 作業内容
-    doc.setFontSize(14);
-    doc.text("作業内容", 20, 90);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "作業報告書.txt";
+    a.click();
+}
 
-    doc.setFontSize(12);
-    const content = doc.splitTextToSize(document.getElementById("content").value, 170);
-    doc.text(content, 20, 100);
+// ② 社内FAQ（AI回答）
+async function askAI() {
+    const q = document.getElementById("faqInput").value;
+    document.getElementById("faqOutput").textContent = "回答生成中…";
 
-    // 保存
-    doc.save("report_test.pdf");
+    const answer = `【AI回答】\n質問：${q}\n\n→ この質問に対する一般的な回答例を表示します。\n（※API接続前のテスト動作）`;
+
+    document.getElementById("faqOutput").textContent = answer;
+}
+
+// ③ 顧客メール自動返信
+function generateMail() {
+    const text = document.getElementById("mailInput").value;
+
+    const template = 
+`【顧客返信テンプレ】
+
+お問い合わせありがとうございます。
+
+以下の内容について確認いたしました：
+${text}
+
+担当部署と連携し、対応を進めてまいります。
+引き続きよろしくお願いいたします。`;
+
+    document.getElementById("mailOutput").textContent = template;
+}
+
+// ④ CSV整形
+function processCSV() {
+    const file = document.getElementById("csvInput").files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const lines = e.target.result.split("\n");
+        const cleaned = lines.map(l => l.trim()).join("\n");
+        document.getElementById("csvOutput").textContent = cleaned;
+    };
+    reader.readAsText(file);
+}
+
+// ⑤ 議事録 → 要点抽出
+function summarize() {
+    const text = document.getElementById("summaryInput").value;
+
+    const summary = 
+`【要点まとめ】
+・議事録の主要ポイントを抽出します
+・重要な決定事項を整理します
+・次回までのアクションを明確化します
+
+（※AI接続前のテスト動作）`;
+
+    document.getElementById("summaryOutput").textContent = summary;
 }
