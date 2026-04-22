@@ -103,3 +103,27 @@ function summarize() {
 
     document.getElementById("summaryOutput").textContent = summary;
 }
+// ページ切り替え
+function showPage(pageId) {
+    // すべてのページを非表示
+    document.querySelectorAll('.page').forEach(page => {
+        page.style.display = 'none';
+    });
+
+    // メニューを非表示
+    document.getElementById('menu').style.display = 'none';
+
+    // 指定ページを表示
+    document.getElementById(pageId).style.display = 'block';
+}
+
+// メニューに戻る
+function backMenu() {
+    // すべてのページを非表示
+    document.querySelectorAll('.page').forEach(page => {
+        page.style.display = 'none';
+    });
+
+    // メニューを表示
+    document.getElementById('menu').style.display = 'block';
+}
