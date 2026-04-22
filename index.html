@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>作業報告書テスト版</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<h1>作業報告書（テスト版）</h1>
+
+<div class="form-block">
+    <label>作業日</label>
+    <input type="date" id="workDate">
+
+    <label>現場名</label>
+    <input type="text" id="siteName">
+
+    <label>担当者</label>
+    <input type="text" id="person">
+
+    <label>作業区分</label>
+    <input type="text" id="type">
+
+    <label>作業内容</label>
+    <textarea id="content" rows="6"></textarea>
+
+    <button onclick="generatePDF()">PDF出力</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
