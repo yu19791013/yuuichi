@@ -32,7 +32,8 @@ async function askAI() {
     const q = document.getElementById("faqInput").value;
     document.getElementById("faqOutput").textContent = "回答生成中…";
 
-    const apiKey = "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;
+   const apiKey = "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";
+ bHpy54NyNb-6gpM24alcA;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
